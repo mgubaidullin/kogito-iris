@@ -1,0 +1,294 @@
+<dmn:definitions xmlns:dmn="http://www.omg.org/spec/DMN/20180521/MODEL/" xmlns="https://kiegroup.org/dmn/_8C5D2FED-B537-4A71-BCCA-63AF551F620C" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:dmndi="http://www.omg.org/spec/DMN/20180521/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:feel="http://www.omg.org/spec/DMN/20180521/FEEL/" id="_D83D3847-223A-4F91-950B-11AAC5D115D8" name="iris" typeLanguage="http://www.omg.org/spec/DMN/20180521/FEEL/" namespace="https://kiegroup.org/dmn/_8C5D2FED-B537-4A71-BCCA-63AF551F620C">
+  <dmn:extensionElements/>
+  <dmn:itemDefinition id="_16507ECF-A1F4-4506-B726-41E0D5B98F3C" name="petalHeight" isCollection="false">
+    <dmn:typeRef>number</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_A541E926-65D3-4957-A1A0-C22C7E574A87" name="petalWidth" isCollection="false">
+    <dmn:typeRef>number</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_4A4FF294-93FD-474E-A98B-4C19742119D7" name="sepalHeight" isCollection="false">
+    <dmn:typeRef>number</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_F2F9BEFB-6D09-487A-B097-9EB93ED93258" name="sepalWidth" isCollection="false">
+    <dmn:typeRef>number</dmn:typeRef>
+  </dmn:itemDefinition>
+  <dmn:itemDefinition id="_34048FC1-FA02-4E69-BB25-012DF4B29FC2" name="result" isCollection="false">
+    <dmn:itemComponent id="_78DA44AC-3C69-4B87-9BF6-43D02643FC7F" name="setosa" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_6841BFCD-0811-436B-AA1A-34AEE5A3AC30" name="virginica" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+    <dmn:itemComponent id="_CF5E7E30-059B-4A55-B748-5C86979FAC1B" name="versicolor" isCollection="false">
+      <dmn:typeRef>number</dmn:typeRef>
+    </dmn:itemComponent>
+  </dmn:itemDefinition>
+  <dmn:inputData id="_A5A94DC5-8C4A-4A95-8888-9B8E28F182B2" name="PetalHeight">
+    <dmn:extensionElements/>
+    <dmn:variable id="_5A08F0BB-DFE8-48E7-96A2-33FC32666BEC" name="PetalHeight" typeRef="petalHeight"/>
+  </dmn:inputData>
+  <dmn:inputData id="_81514DDB-8FAC-4462-BE66-CE5A2D423CE2" name="PetalWidth">
+    <dmn:extensionElements/>
+    <dmn:variable id="_17C8C35F-29A3-4167-8356-508C6F82D815" name="PetalWidth" typeRef="petalWidth"/>
+  </dmn:inputData>
+  <dmn:inputData id="_22CAE90A-3828-4849-B380-6F7686E31CDA" name="SepalHeight">
+    <dmn:extensionElements/>
+    <dmn:variable id="_D473D51E-B7AF-476B-8539-28CA5C7F0AB5" name="SepalHeight" typeRef="sepalHeight"/>
+  </dmn:inputData>
+  <dmn:inputData id="_5FD99C9C-3658-4752-A50B-B3A34EF3AC48" name="SepalWidth">
+    <dmn:extensionElements/>
+    <dmn:variable id="_935F87EB-6345-480A-B0CC-E389F73055C3" name="SepalWidth" typeRef="sepalWidth"/>
+  </dmn:inputData>
+  <dmn:decision id="_9E99AB2D-6FD7-4DCA-8EDB-BCEB18A24751" name="Classification">
+    <dmn:extensionElements/>
+    <dmn:question>What is the flower class probability?</dmn:question>
+    <dmn:allowedAnswers>setosa: #.##, versicolor: #.##, virginica: #.##</dmn:allowedAnswers>
+    <dmn:variable id="_8CB84989-BCE3-496F-A40C-B1211620701B" name="Classification"/>
+    <dmn:informationRequirement id="_F3DB5356-D12F-442B-8055-E3489DBF1C9A">
+      <dmn:requiredInput href="#_A5A94DC5-8C4A-4A95-8888-9B8E28F182B2"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_BB727A48-9E95-401B-B187-5E0B6E1F3527">
+      <dmn:requiredInput href="#_81514DDB-8FAC-4462-BE66-CE5A2D423CE2"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_71C86CC7-B727-42FD-82A3-DF77549FC754">
+      <dmn:requiredInput href="#_22CAE90A-3828-4849-B380-6F7686E31CDA"/>
+    </dmn:informationRequirement>
+    <dmn:informationRequirement id="_B30444DB-7671-49D7-BC54-413EC5CF514E">
+      <dmn:requiredInput href="#_5FD99C9C-3658-4752-A50B-B3A34EF3AC48"/>
+    </dmn:informationRequirement>
+    <dmn:knowledgeRequirement id="_C477377A-AF56-41AC-9527-FFEA89273AB7">
+      <dmn:requiredKnowledge href="#_0923CA0C-A133-4ED8-A5B8-97B9FDED797D"/>
+    </dmn:knowledgeRequirement>
+    <dmn:literalExpression id="_B0AFD6F7-A0B1-46E6-AF67-E88506CAE6BB">
+      <dmn:text>IrisClassificator(PetalHeight, PetalWidth, SepalHeight, SepalWidth)</dmn:text>
+    </dmn:literalExpression>
+  </dmn:decision>
+  <dmn:businessKnowledgeModel id="_0923CA0C-A133-4ED8-A5B8-97B9FDED797D" name="IrisClassificator">
+    <dmn:extensionElements/>
+    <dmn:variable id="_BCE6D74E-7A9E-46E0-B81A-BE66790F35D5" name="IrisClassificator"/>
+    <dmn:encapsulatedLogic id="_D255E5F9-71A0-4E5B-B4E5-25F2BB688554" kind="Java">
+      <dmn:formalParameter id="_A4B31325-3E28-48B9-B877-14C37579AF45" name="pH" typeRef="number"/>
+      <dmn:formalParameter id="_3B464F6B-E454-49F2-8BDB-E61E8343992A" name="pW" typeRef="number"/>
+      <dmn:formalParameter id="_3C75EF30-A926-4C57-B1F7-22318C9CF305" name="sH" typeRef="number"/>
+      <dmn:formalParameter id="_EBCF52B2-B89C-44A3-B21A-133B28A43F6F" name="sW" typeRef="number"/>
+      <dmn:context id="_A7381968-61DA-4C36-B8DA-E2F947F81E1E">
+        <dmn:contextEntry>
+          <dmn:variable id="_DD482BBA-DB0C-4939-920D-4AE59664C2BA" name="class" typeRef="string"/>
+          <dmn:literalExpression id="_60CD8554-E9A3-405F-A18A-0C65DD1D0FD7">
+            <dmn:text>"one.entropy.demo.IrisClassificator"</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+        <dmn:contextEntry>
+          <dmn:variable id="_297687EC-84D6-4739-8219-1CBDC07BB243" name="method signature" typeRef="string"/>
+          <dmn:literalExpression id="_35BA8FB2-735C-4D4F-83B9-ACF68B64A5FC">
+            <dmn:text>"classify(double, double, double, double)"</dmn:text>
+          </dmn:literalExpression>
+        </dmn:contextEntry>
+      </dmn:context>
+    </dmn:encapsulatedLogic>
+  </dmn:businessKnowledgeModel>
+  <dmn:decision id="_836C1B65-F4AF-43EC-AB36-01BB1E90873E" name="Decision">
+    <dmn:extensionElements/>
+    <dmn:question>What is the flower class?</dmn:question>
+    <dmn:allowedAnswers>setosa, versicolor, virginica</dmn:allowedAnswers>
+    <dmn:variable id="_B5F228AD-FA64-433F-B136-A6092C486D1D" name="Decision" typeRef="string"/>
+    <dmn:informationRequirement id="_A682BBA7-BB0F-419E-9E9C-4AFDF9B784FD">
+      <dmn:requiredDecision href="#_9E99AB2D-6FD7-4DCA-8EDB-BCEB18A24751"/>
+    </dmn:informationRequirement>
+    <dmn:decisionTable id="_40FF66F6-4B56-4E37-9F04-FDAB018017D6" hitPolicy="FIRST" preferredOrientation="Rule-as-Row">
+      <dmn:input id="_F7410028-000E-41BF-87B5-5AE07BB414E0">
+        <dmn:inputExpression id="_788A8C72-584C-4747-84CA-3C8B730F5D8C">
+          <dmn:text>Classification.versicolor</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_F254DD41-5DD8-4FFD-9EB6-4C6267C04153">
+        <dmn:inputExpression id="_625CF916-E7DE-4B3D-85A1-7B9B6DA4590D" typeRef="number">
+          <dmn:text>Classification.virginica</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:input id="_58F189BB-6078-4510-96DB-C62E4E23E182">
+        <dmn:inputExpression id="_B33E7818-40BF-447F-89AE-DE54419E1644" typeRef="number">
+          <dmn:text>Classification.setosa</dmn:text>
+        </dmn:inputExpression>
+      </dmn:input>
+      <dmn:output id="_252757AA-B19E-4306-94F0-442B71DC8510" typeRef="string"/>
+      <dmn:rule id="_116A3A03-F87E-48D2-BA85-32C764237196">
+        <dmn:inputEntry id="_01AB2522-B510-405C-A0BB-9523C1F2D710">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_827B607C-2A23-4566-BD06-86880809D913">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_B7F8502A-89F0-4911-9A58-D888C8EA7AC2">
+          <dmn:text>&gt;= 0.5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_0DCC8001-8AB2-429C-AF82-87F31F30425A">
+          <dmn:text>"SETOSA"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_A0DD3942-D3CF-479D-8DC4-1B3E1DF593F4">
+        <dmn:inputEntry id="_BBF46405-7053-4E18-B8AC-481609C57F31">
+          <dmn:text>&gt;= 0.5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_C41247E6-DB32-4D2B-BD8D-F2777608AFEC">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_DA6BBC32-CBA1-41A8-932D-BC285DAAE8E6">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_15ADB4DC-D80F-47E1-882B-B03D64D3840B">
+          <dmn:text>"VERSICOLOR"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_2801063A-6C44-44FD-AC94-E6E97C7D24C3">
+        <dmn:inputEntry id="_A5BFC808-B6B9-4CAA-9B0A-01A76AB4233F">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_698945D1-CA07-45A0-B405-15A4A0D4C0FC">
+          <dmn:text>&gt;= 0.5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_AF82D2E4-8FEC-40BA-96BD-B0B2B7D083C8">
+          <dmn:text>-</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_B0BDB141-2B7D-4F63-952A-62BBBBA26E2E">
+          <dmn:text>"VERSICOLOR"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+      <dmn:rule id="_68BA65EF-23E1-43E6-816D-0B93EC677851">
+        <dmn:inputEntry id="_F7EDE34F-4509-4248-ABF7-CED9BDBFE1CD">
+          <dmn:text>&lt; 0.5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_2B3F25BB-B771-4BEE-83AF-335A3E973872">
+          <dmn:text>&lt; 0.5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:inputEntry id="_BC5E2D2D-BFA1-4DCA-BB80-4A21C212C9CC">
+          <dmn:text>&lt; 0.5</dmn:text>
+        </dmn:inputEntry>
+        <dmn:outputEntry id="_E80DEC61-F344-43B8-9B08-AAF7F8055DF2">
+          <dmn:text>"NOT DEFINED"</dmn:text>
+        </dmn:outputEntry>
+      </dmn:rule>
+    </dmn:decisionTable>
+  </dmn:decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <di:extension>
+        <kie:ComponentsWidthsExtension>
+          <kie:ComponentWidths dmnElementRef="_B0AFD6F7-A0B1-46E6-AF67-E88506CAE6BB">
+            <kie:width>686</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_A7381968-61DA-4C36-B8DA-E2F947F81E1E">
+            <kie:width>50</kie:width>
+            <kie:width>100</kie:width>
+            <kie:width>427</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_60CD8554-E9A3-405F-A18A-0C65DD1D0FD7">
+            <kie:width>427</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_35BA8FB2-735C-4D4F-83B9-ACF68B64A5FC">
+            <kie:width>427</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_D255E5F9-71A0-4E5B-B4E5-25F2BB688554">
+            <kie:width>50</kie:width>
+            <kie:width>597</kie:width>
+          </kie:ComponentWidths>
+          <kie:ComponentWidths dmnElementRef="_40FF66F6-4B56-4E37-9F04-FDAB018017D6">
+            <kie:width>50</kie:width>
+            <kie:width>175</kie:width>
+            <kie:width>164</kie:width>
+            <kie:width>164</kie:width>
+            <kie:width>146</kie:width>
+            <kie:width>163</kie:width>
+          </kie:ComponentWidths>
+        </kie:ComponentsWidthsExtension>
+      </di:extension>
+      <dmndi:DMNShape id="dmnshape-_A5A94DC5-8C4A-4A95-8888-9B8E28F182B2" dmnElementRef="_A5A94DC5-8C4A-4A95-8888-9B8E28F182B2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="147" y="448" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_81514DDB-8FAC-4462-BE66-CE5A2D423CE2" dmnElementRef="_81514DDB-8FAC-4462-BE66-CE5A2D423CE2" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="275" y="448" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_22CAE90A-3828-4849-B380-6F7686E31CDA" dmnElementRef="_22CAE90A-3828-4849-B380-6F7686E31CDA" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="403" y="448" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_5FD99C9C-3658-4752-A50B-B3A34EF3AC48" dmnElementRef="_5FD99C9C-3658-4752-A50B-B3A34EF3AC48" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="531" y="448" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_9E99AB2D-6FD7-4DCA-8EDB-BCEB18A24751" dmnElementRef="_9E99AB2D-6FD7-4DCA-8EDB-BCEB18A24751" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="329" y="268" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_0923CA0C-A133-4ED8-A5B8-97B9FDED797D" dmnElementRef="_0923CA0C-A133-4ED8-A5B8-97B9FDED797D" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="565" y="300" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="dmnshape-_836C1B65-F4AF-43EC-AB36-01BB1E90873E" dmnElementRef="_836C1B65-F4AF-43EC-AB36-01BB1E90873E" isCollapsed="false">
+        <dmndi:DMNStyle>
+          <dmndi:FillColor red="255" green="255" blue="255"/>
+          <dmndi:StrokeColor red="0" green="0" blue="0"/>
+          <dmndi:FontColor red="0" green="0" blue="0"/>
+        </dmndi:DMNStyle>
+        <dc:Bounds x="329" y="153" width="100" height="50"/>
+        <dmndi:DMNLabel/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="dmnedge-_F3DB5356-D12F-442B-8055-E3489DBF1C9A" dmnElementRef="_F3DB5356-D12F-442B-8055-E3489DBF1C9A">
+        <di:waypoint x="197" y="473"/>
+        <di:waypoint x="379" y="318"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_BB727A48-9E95-401B-B187-5E0B6E1F3527" dmnElementRef="_BB727A48-9E95-401B-B187-5E0B6E1F3527">
+        <di:waypoint x="325" y="473"/>
+        <di:waypoint x="379" y="318"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_71C86CC7-B727-42FD-82A3-DF77549FC754" dmnElementRef="_71C86CC7-B727-42FD-82A3-DF77549FC754">
+        <di:waypoint x="453" y="473"/>
+        <di:waypoint x="379" y="318"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_B30444DB-7671-49D7-BC54-413EC5CF514E" dmnElementRef="_B30444DB-7671-49D7-BC54-413EC5CF514E">
+        <di:waypoint x="581" y="473"/>
+        <di:waypoint x="379" y="318"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_C477377A-AF56-41AC-9527-FFEA89273AB7" dmnElementRef="_C477377A-AF56-41AC-9527-FFEA89273AB7">
+        <di:waypoint x="615" y="325"/>
+        <di:waypoint x="429" y="293"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="dmnedge-_A682BBA7-BB0F-419E-9E9C-4AFDF9B784FD" dmnElementRef="_A682BBA7-BB0F-419E-9E9C-4AFDF9B784FD">
+        <di:waypoint x="429" y="293"/>
+        <di:waypoint x="329" y="178"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</dmn:definitions>
