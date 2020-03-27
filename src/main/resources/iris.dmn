@@ -81,7 +81,7 @@
         <dmn:contextEntry>
           <dmn:variable id="_297687EC-84D6-4739-8219-1CBDC07BB243" name="method signature" typeRef="string"/>
           <dmn:literalExpression id="_35BA8FB2-735C-4D4F-83B9-ACF68B64A5FC">
-            <dmn:text>"classify(double, double, double, double)"</dmn:text>
+            <dmn:text>"classify(float, float, float, float)"</dmn:text>
           </dmn:literalExpression>
         </dmn:contextEntry>
       </dmn:context>
