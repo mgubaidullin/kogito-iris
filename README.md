@@ -1,44 +1,72 @@
-# org.kie.kogito.kogito-quarkus-archetype - 8.0.0-SNAPSHOT #
+# Kogito DNM for Iris Flower Classification
 
-# Running
+Demonstrates Deep Learning integration into Kogito DMN.
 
-- Compile and Run
+The Iris Flower Classification is a hello world example in machine learning for multi class classification. 
+Multi class classification is task of assigning input to one of several predefined categories. 
+The task for Iris flower classification is to assign flowers into one of three categories based on 4 input values which 
+represent petal and sepal dimensions (with and height).
 
-    ```
-     mvn clean package quarkus:dev    
-    ```
+# Decision logic
 
-- Native Image (requires JAVA_HOME to point to a valid GraalVM)
+![Screenshot](img/dmn.png)
 
-    ```
-    mvn clean package -Pnative
-    ```
-  
-  native executable (and runnable jar) generated in `target/`
+### Input data
+- PetalHeight
+- PetalWidth
+- SepalHeight
+- SepalWidth
 
-# Test your application
-
-Generated application comes with sample test process that allows you to verify if the application is working as expected. Simply execute following command to try it out
-
-```sh
-curl -d '{}' -H "Content-Type: application/json" -X POST http://localhost:8080/tests                                                                                                    
+### Business Knowledge Model
+- **IrisClassificator** trained on [iris.txt](src/main/resources/iris.txt) dataset
+```
+MultiClassClassifierNetwork.builder()
+        .inputsNum(4)
+        .hiddenLayers(16)
+        .outputsNum(3)
+        .maxEpochs(9000)
+        .maxError(0.03f)
+        .learningRate(0.01f)
+        .trainingSet(trainTest[0])
+        .build();
 ```
 
-Once successfully invoked you should see "Hello World" in the console of the running application.
+### Decisions
+- Classification returns key-values of each class (setosa, versicolor, virginica) probabilities using **IrisClassificator** BKM
+- Decision returns selected class based on the following decision table
 
-# Developing
-
-Add your business assets resources (process definition, rules, decisions) into src/main/resources.
-
-Add your java classes (data model, utilities, services) into src/main/java.
-
-Then just build the project and run.
+![Screenshot](img/decision.png)
 
 
-# Swagger documentation
+# How to
+#### Start application
+```
+mvn clean compile quarkus:dev
+```
 
-Point to [swagger docs](http://localhost:8080/docs/swagger.json) to retrieve swagger definition of the exposed service
+### Call service command-line
+```
+curl -X POST "http://localhost:8080/iris" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{\"PetalHeight\":0.64556962,\"PetalWidth\":0.795454545,\"SepalHeight\":0.202898551,\"SepalWidth\":0.08}"
+```
 
-You can visualize that JSON file at [swagger editor](https://editor.swagger.io)
+### Call service in browser
+```
+open http://localhost:8080/swagger-ui/
+```
 
-In addition client application can be easily generated from the swagger definition to interact with this service.
+### Expected response
+```
+{
+  "SepalHeight": 0.202898551,
+  "PetalWidth": 0.795454545,
+  "PetalHeight": 0.64556962,
+  "Classification": {
+    "virginica": 1.0529712e-17,
+    "setosa": 0.99994683,
+    "versicolor": 0.000053133565
+  },
+  "SepalWidth": 0.08,
+  "IrisClassificator": "function IrisClassificator( pH, pW, sH, sW )",
+  "Decision": "SETOSA"
+}
+```

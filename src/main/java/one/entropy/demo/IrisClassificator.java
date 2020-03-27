@@ -46,8 +46,8 @@ public class IrisClassificator {
                 .build();
     }
 
-    public static Map<String, Float> classify(float ph, float pw, float sh, float sw){
-        return irisClassifier.classify(new float[] {ph, pw, sh, sw}).entrySet().stream().collect(Collectors.toMap(e -> e.getKey().trim(), e -> e.getValue()));
+    public static Map<String, Float> classify(float ph, float pw, float sh, float sw) {
+        return irisClassifier.classify(new float[]{ph, pw, sh, sw}).entrySet().stream().collect(Collectors.toMap(e -> e.getKey().trim(), e -> e.getValue()));
     }
 
     private static BasicDataSet fromURL(URL url, String delimiter, int inputsNum, int outputsNum, boolean hasColumnNames) throws IOException {
@@ -72,12 +72,12 @@ public class IrisClassificator {
             dataSet.setColumnNames(colNames);
             skipCount = 1;
         } else {
-            String[] colNames = new String[inputsNum+outputsNum];
-            for(int i=0; i<inputsNum;i++)
-                colNames[i] = "in"+(i+1);
+            String[] colNames = new String[inputsNum + outputsNum];
+            for (int i = 0; i < inputsNum; i++)
+                colNames[i] = "in" + (i + 1);
 
-            for(int j=0; j<outputsNum;j++)
-                colNames[inputsNum+j] = "out"+(j+1);
+            for (int j = 0; j < outputsNum; j++)
+                colNames[inputsNum + j] = "out" + (j + 1);
 
             dataSet.setColumnNames(colNames);
         }
